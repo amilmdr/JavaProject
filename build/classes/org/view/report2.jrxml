@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e6ad909-a9e8-425d-865b-4626a37ec2cf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="tod" class="java.lang.String"/>
+	<parameter name="fromd" class="java.lang.String"/>
+	<parameter name="searchData" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     medicines.`medicineId` AS medicines_medicineId,
+     medicines.`genericName` AS medicines_genericName,
+     medicines.`specificName` AS medicines_specificName,
+     medicines.`batchId` AS medicines_batchId,
+     medicines.`chemicalComposition` AS medicines_chemicalComposition,
+     medicines.`CostPricePerUnit` AS medicines_CostPricePerUnit,
+     medicines.`SellingPricePerUnits` AS medicines_SellingPricePerUnits,
+     medicines.`expDate` AS medicines_expDate,
+     medicines.`mfgDate` AS medicines_mfgDate,
+     medicines.`dose` AS medicines_dose,
+     medicines.`Quantity` AS medicines_Quantity,
+     medicines.`pescriptionStatus` AS medicines_pescriptionStatus,
+     medicines.`userID` AS medicines_userID,
+     medicines.`suppliersId` AS medicines_suppliersId,
+     medicines.`typesID` AS medicines_typesID,
+     sales.`salesId` AS sales_salesId,
+     sales.`date` AS sales_date,
+     sales.`discount` AS sales_discount,
+     sales.`customerName` AS sales_customerName,
+     sales.`phoneNumber` AS sales_phoneNumber,
+     sales.`userID` AS sales_userID,
+     sales.`prescriptionId` AS sales_prescriptionId,
+     salesitems.`salesItemId` AS salesitems_salesItemId,
+     salesitems.`batchID` AS salesitems_batchID,
+     salesitems.`quantity` AS salesitems_quantity,
+     salesitems.`SellingPricePerUnits` AS salesitems_SellingPricePerUnits,
+     salesitems.`userID` AS salesitems_userID,
+     salesitems.`medicineId` AS salesitems_medicineId,
+     salesitems.`salesId` AS salesitems_salesId
+FROM
+     `sales` sales INNER JOIN `salesitems` salesitems ON sales.`salesId` = salesitems.`salesId`
+     INNER JOIN `medicines` medicines ON salesitems.`medicineId` = medicines.`medicineId`
+ where 
+sales.`date` between $P{fromd} and $P{tod} 
+And 
+ medicines.`batchId`=$P{searchData} or medicines.`specificName`=$P{searchData} or sales.`customerName`=$P{searchData}]]>
+	</queryString>
+	<field name="medicines_medicineId" class="java.lang.Integer"/>
+	<field name="medicines_genericName" class="java.lang.String"/>
+	<field name="medicines_specificName" class="java.lang.String"/>
+	<field name="medicines_batchId" class="java.lang.String"/>
+	<field name="medicines_chemicalComposition" class="java.lang.String"/>
+	<field name="medicines_CostPricePerUnit" class="java.lang.Double"/>
+	<field name="medicines_SellingPricePerUnits" class="java.lang.Double"/>
+	<field name="medicines_expDate" class="java.sql.Date"/>
+	<field name="medicines_mfgDate" class="java.sql.Date"/>
+	<field name="medicines_dose" class="java.lang.String"/>
+	<field name="medicines_Quantity" class="java.lang.Integer"/>
+	<field name="medicines_pescriptionStatus" class="java.lang.Boolean"/>
+	<field name="medicines_userID" class="java.lang.Integer"/>
+	<field name="medicines_suppliersId" class="java.lang.Integer"/>
+	<field name="medicines_typesID" class="java.lang.Integer"/>
+	<field name="sales_salesId" class="java.lang.Integer"/>
+	<field name="sales_date" class="java.sql.Date"/>
+	<field name="sales_discount" class="java.lang.Integer"/>
+	<field name="sales_customerName" class="java.lang.String"/>
+	<field name="sales_phoneNumber" class="java.lang.Long"/>
+	<field name="sales_userID" class="java.lang.Integer"/>
+	<field name="sales_prescriptionId" class="java.lang.Integer"/>
+	<field name="salesitems_salesItemId" class="java.lang.Integer"/>
+	<field name="salesitems_batchID" class="java.lang.String"/>
+	<field name="salesitems_quantity" class="java.lang.Integer"/>
+	<field name="salesitems_SellingPricePerUnits" class="java.lang.Double"/>
+	<field name="salesitems_userID" class="java.lang.Integer"/>
+	<field name="salesitems_medicineId" class="java.lang.Integer"/>
+	<field name="salesitems_salesId" class="java.lang.Integer"/>
+	<variable name="medicines_Quantity_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{medicines_Quantity}]]></variableExpression>
+	</variable>
+	<variable name="salesitems_quantity_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{salesitems_quantity}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="444" y="12" width="100" height="20" uuid="f713a4b2-ce38-460e-8f33-ade7bccedd04"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="114" splitType="Stretch">
+			<staticText>
+				<reportElement x="86" y="13" width="358" height="65" uuid="98e67986-4503-4c2a-b33c-2e81272438b3"/>
+				<textElement textAlignment="Center">
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales Items  Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="0" width="82" height="20" uuid="051008f5-4fff-44ea-8e0f-01f9ee6b0420"/>
+				<text><![CDATA[Medicine Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="0" width="42" height="20" uuid="32187549-9722-4f35-aa7a-4121f993215a"/>
+				<text><![CDATA[BatchId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="243" y="0" width="84" height="20" uuid="258870d5-89d3-409b-bbba-456c98b0c658"/>
+				<text><![CDATA[Customer Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="0" width="53" height="20" uuid="7731f075-06ea-47a5-984d-ebdbf9d487e3"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="53" height="20" uuid="7f06d6d6-a527-4dea-b4fc-389b4ed36fde"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="0" width="65" height="20" uuid="bdf43e10-cdd2-48a7-9bb3-b98974b60f13"/>
+				<text><![CDATA[Discount%]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="18" y="0" width="82" height="20" uuid="583b44e5-6209-4d3d-9173-4435baf297ef"/>
+				<textFieldExpression><![CDATA[$F{medicines_specificName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="1" width="42" height="20" uuid="09f1e204-21f6-43c3-a945-4d492b1d185d"/>
+				<textFieldExpression><![CDATA[$F{medicines_batchId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="0" width="84" height="20" uuid="e15400d0-7f6c-47ec-a1ec-6ae21048a25d"/>
+				<textFieldExpression><![CDATA[$F{sales_customerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="1" width="53" height="20" uuid="e10165f5-381b-4030-95e7-64dffe452a89"/>
+				<textFieldExpression><![CDATA[$F{sales_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="22" y="20" width="522" height="1" uuid="dc122299-ad73-48f1-9c8b-b4cfb6c0bb9e"/>
+			</line>
+			<textField>
+				<reportElement x="444" y="1" width="53" height="20" uuid="6177dd16-e947-4654-9317-2497374286bc"/>
+				<textFieldExpression><![CDATA[$F{salesitems_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="1" width="65" height="20" uuid="edbae71a-fd89-41f0-bc46-99068475eeb6"/>
+				<textFieldExpression><![CDATA[$F{sales_discount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="11" width="82" height="20" uuid="bdb07574-8bca-44a5-b545-784b47d1f5b7"/>
+				<text><![CDATA[Total Quantity]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="443" y="7" width="100" height="20" uuid="980a442a-53ce-437f-b64f-7eb3fca2593a"/>
+				<textFieldExpression><![CDATA[$V{salesitems_quantity_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

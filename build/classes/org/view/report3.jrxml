@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="131713e8-a4b0-4c16-aced-f809f0daa081">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cdate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     medicines.`medicineId` AS medicines_medicineId,
+     medicines.`genericName` AS medicines_genericName,
+     medicines.`specificName` AS medicines_specificName,
+     medicines.`batchId` AS medicines_batchId,
+     medicines.`chemicalComposition` AS medicines_chemicalComposition,
+     medicines.`CostPricePerUnit` AS medicines_CostPricePerUnit,
+     medicines.`SellingPricePerUnits` AS medicines_SellingPricePerUnits,
+     medicines.`expDate` AS medicines_expDate,
+     medicines.`mfgDate` AS medicines_mfgDate,
+     medicines.`dose` AS medicines_dose,
+     medicines.`Quantity` AS medicines_Quantity,
+     medicines.`pescriptionStatus` AS medicines_pescriptionStatus,
+     medicines.`userID` AS medicines_userID,
+     medicines.`suppliersId` AS medicines_suppliersId,
+     medicines.`typesID` AS medicines_typesID
+FROM
+     `medicines` medicines where  medicines.`expDate`< $P{cdate}]]>
+	</queryString>
+	<field name="medicines_medicineId" class="java.lang.Integer"/>
+	<field name="medicines_genericName" class="java.lang.String"/>
+	<field name="medicines_specificName" class="java.lang.String"/>
+	<field name="medicines_batchId" class="java.lang.String"/>
+	<field name="medicines_chemicalComposition" class="java.lang.String"/>
+	<field name="medicines_CostPricePerUnit" class="java.lang.Double"/>
+	<field name="medicines_SellingPricePerUnits" class="java.lang.Double"/>
+	<field name="medicines_expDate" class="java.sql.Date"/>
+	<field name="medicines_mfgDate" class="java.sql.Date"/>
+	<field name="medicines_dose" class="java.lang.String"/>
+	<field name="medicines_Quantity" class="java.lang.Integer"/>
+	<field name="medicines_pescriptionStatus" class="java.lang.Boolean"/>
+	<field name="medicines_userID" class="java.lang.Integer"/>
+	<field name="medicines_suppliersId" class="java.lang.Integer"/>
+	<field name="medicines_typesID" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="27" splitType="Stretch">
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="453" y="0" width="100" height="20" uuid="b8df8d79-66b2-4762-ac4e-15e86cb3f2f6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="117" y="10" width="297" height="57" uuid="8a8e1dd6-6c3e-4f37-acba-3d9e54d51646"/>
+				<textElement>
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[Expired Medicine ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="0" width="18" height="20" uuid="a5c09713-773c-4ba2-9e03-728a62de2ca3"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="0" width="68" height="20" uuid="d4aad184-b4c8-4b82-b5b5-f1032923b972"/>
+				<text><![CDATA[GenericName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="0" width="74" height="20" uuid="f7a780c4-9612-455f-8b25-6b8f9677de8b"/>
+				<text><![CDATA[SpecificName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="202" y="0" width="45" height="20" uuid="5389f378-8262-427d-95b0-abb024146b1d"/>
+				<text><![CDATA[BatchId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="0" width="114" height="20" uuid="ba6a43af-da7b-4bc6-93b3-7eaa2e8fcebd"/>
+				<text><![CDATA[Chemical Composition]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="389" y="0" width="43" height="20" uuid="0825a7a6-e036-4404-b368-87e811e26bb2"/>
+				<text><![CDATA[ExpDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="0" width="28" height="20" uuid="5a392171-76f2-43e9-ab59-f8dfdc6aacef"/>
+				<text><![CDATA[Dose]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="495" y="0" width="48" height="20" uuid="e69a7944-0de0-4dc4-9151-5249c78bb9d8"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="6" y="2" width="18" height="20" uuid="fbf231ec-98d1-49df-b1ad-20536c6ee0c4"/>
+				<textFieldExpression><![CDATA[$F{medicines_medicineId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="0" width="50" height="20" uuid="9c8dcfd4-9f6f-4201-9eb0-16b7cba5be43"/>
+				<textFieldExpression><![CDATA[$F{medicines_genericName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="74" height="20" uuid="fcc45ba6-beac-4539-a7cf-dc878e65a413"/>
+				<textFieldExpression><![CDATA[$F{medicines_specificName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="0" width="45" height="20" uuid="73c362fe-6f0c-4798-b623-950005e8eb3d"/>
+				<textFieldExpression><![CDATA[$F{medicines_batchId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="90" height="20" uuid="f9604236-b766-4211-8298-7aa756757af1"/>
+				<textFieldExpression><![CDATA[$F{medicines_chemicalComposition}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="0" width="43" height="20" uuid="dba86888-67cf-406e-8aa7-09cac17ade76"/>
+				<textFieldExpression><![CDATA[$F{medicines_expDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="0" width="28" height="20" uuid="b8249edc-b4e4-4a8f-b1c3-79019e942e60"/>
+				<textFieldExpression><![CDATA[$F{medicines_dose}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="495" y="0" width="48" height="20" uuid="0dd02925-73f7-4667-b826-3bceee547968"/>
+				<textFieldExpression><![CDATA[$F{medicines_Quantity}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="22" width="543" height="1" uuid="28a8068a-c654-4a46-9bf5-d16623fe28f4"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="43" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
